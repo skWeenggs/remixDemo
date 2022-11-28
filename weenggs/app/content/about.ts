@@ -17,7 +17,7 @@ export const data=[
       logo:"fa fa-code",
       head:"Know what we do best",
       desc:' We are masters of using modern technology to develop digital solutions for you!',
-      path:"/desktop-app-development",
+      path:"/service/desktop-app-development/",
       btn:'Our services'
     },
   ]

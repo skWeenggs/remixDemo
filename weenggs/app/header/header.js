@@ -1,12 +1,21 @@
 import React,{useEffect, useState} from 'react'
 import { Transition } from '@headlessui/react';
 import useCollapse from 'react-collapsed';
+
+import { NavLink,Link } from "@remix-run/react";
 const Header =()=> {
-  
+  const activeStyle = {
+    textDecoration: "underline",
+    color: "red",
+  };
+ 
+ 
+
   const [isOpen, setIsOpen] = useState(false);
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
   const [active,setActive] = useState('');
   useEffect(()=>{
+    console.log(location.pathname);
     localStorage.setItem("path",location.pathname);
     setActive(localStorage.getItem('path'))
   },[])
@@ -27,63 +36,90 @@ const Header =()=> {
             <div className="flex px-5  md:pl-5 pl:5 items-center justify-between md:h-13 py-4 md:p-0">
               <div className="flex items-center w-full  " >
                 <div className="flex-shrink-0 w-1/5 ">
-                  <a href='/' onClick={scrollToTop} >
+                  <nav>
+                    <Link to="/" onClick={scrollToTop}>
                     <img width="200" height="50" src="https://www.weenggs.com/wp-content/uploads/2019/01/WeEnggWeb-1.png" className="custom-logo"  alt="Weenggs Technology" />
-                  </a>
-                  
+                    </Link>
+                  </nav>
                 </div>
                 <div className="hidden lg:block w-4/5 m-auto lg:px-5">
                   <div className="justify-end flex items-baseline space-x-2 ">
-                    <a
-                      href="/" onClick={scrollToTop}
-                      className={active && active== '/' ? 'text-red-600 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium': 'text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium'}
-                      // className="  text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium "
+                    <NavLink to="/" onClick={scrollToTop}  
+                    style={({ isActive }) =>
+                      isActive ? activeStyle : undefined
+                    }
+                    className='text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium'
+                    
                     >
                       Home
 
-                    </a>
+                    </NavLink>
 
                     <span className="group relative inline-block">
                     <button className="inline-flex items-center text-black-300  px-3 py-2 rounded-md text-sm font-medium cursor-default" >Services</button>
                     <ul className="absolute hidden pt-1 bg-white text-gray-700 group-hover:block w-max" style={{border:'1px gray double'}}>
-                      <li className=""><a className="whitespace-no-wrap block rounded-t  py-2 px-4 text-xs hover:text-red-500 " href="/service/iphone-app-development/">IPHONE APP DEVELOPMENT</a></li>
+                      <li className="">
+                        <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        }
+                        className="whitespace-no-wrap block rounded-t  py-2 px-4 text-xs hover:text-red-500 " to="/service/iphone-app-development/">IPHONE APP DEVELOPMENT</NavLink></li>
                       <hr/>
-                      <li className=""><a className="whitespace-no-wrap block  py-2 px-4 hover:text-red-500 text-xs" href="/service/android-app-development/">ANDROID APP DEVELOPMENT</a></li>
+                      <li className=""><NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } className="whitespace-no-wrap block  py-2 px-4 hover:text-red-500 text-xs" to="/service/android-app-development/">ANDROID APP DEVELOPMENT</NavLink></li>
                       <hr/>
-                      <li className=""><a className="whitespace-no-wrap block  py-2 px-4 hover:text-red-500 text-xs" href="/service/custom-web-development/">CUSTOM WEB DEVELOPMENT</a></li>
+                      <li className=""><NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        }
+                        className="whitespace-no-wrap block  py-2 px-4 hover:text-red-500 text-xs" to="/service/custom-web-development/">CUSTOM WEB DEVELOPMENT</NavLink></li>
                       <hr/>
-                      <li className=""><a className="whitespace-no-wrap block  py-2 px-4 hover:text-red-500 text-xs" href="/service/desktop-app-development/">DESKTOP APP DEVELOPMENT</a></li>
+                      <li className=""><NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } className="whitespace-no-wrap block  py-2 px-4 hover:text-red-500 text-xs" to="/service/desktop-app-development/">DESKTOP APP DEVELOPMENT</NavLink></li>
                    </ul>
-                  </span>
-                    <a href="/about"
+                    </span>
+                    <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        }
+                    to="/about"
                     onClick={scrollToTop}
                     className={active && active== '/about/' ? 'text-red-600 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium': 'text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium'}
                       // className="text-black-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium"
                     >
                       AboutUs
-                    </a>
+                    </NavLink>
   
-                    <a
-                      href="/portfolio"
+                    <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } 
+                      to="/portfolio" 
                       onClick={scrollToTop}
-                      className={active && active== '/portfolio/' ? 'text-red-600 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium': 'text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium'}
+                      className='text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium'
                       // className="text-black-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Portfolio
-                    </a>
+                    </NavLink>
   
-                    <a
-                      href="/contact"
+                    <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        }
+                      to="/contact"
                       onClick={scrollToTop}
-                      className={active && active== '/contact/' ? 'text-red-600 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium': 'text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium'}
+                      className= 'text-black hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium'
                       // className="text-black-300 hover:text-red-500 px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Contact
-                    </a>
+                    </NavLink>
 
                     <button 
-                    className={active && active =='/request-a-quote/'?'text-red-600 hover:bg-gray-700  bg-black  rounded-md text-sm font-medium':'text-white hover:bg-gray-700  bg-black  rounded-md text-sm font-medium'}
-                    onClick={scrollToTop}><a className="w-full inline-block px-5 py-4" href='/request-a-quote'>Request a Quote</a></button>
+                     className='text-white hover:bg-gray-700  bg-black  rounded-md text-sm font-medium'
+                     onClick={scrollToTop}>
+                      <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } 
+                        className="w-full inline-block px-5 py-4" to='/request-a-quote'>Request a Quote
+                      </NavLink>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -146,19 +182,21 @@ const Header =()=> {
             {(ref) => (
               <div className="lg:hidden z-40 h-screen max-w-full" id="mobile-menu" >
                 <div ref={ref} className="px-2 pt-2 pb-3 text-center space-y-1 sm:px-3 ">
-                  <a
-                    href="/" 
-                    className={active&&active=='/'?"hover:bg-black-700 text-red-500  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500 ":"hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500"} 
+                  <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } 
+                    to="/" 
+                    className="hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500" 
                     onClick={()=>{setIsOpen(!isOpen)}}
                   >
                     Home
-                  </a>
+                  </NavLink>
                   <hr/>
-                    <div className="  " {...getToggleProps()}>
+                    <div clLinkssName="  " {...getToggleProps()}>
                     {isExpanded ?
                     <> 
                     <div className='flex justify-between'>
-                    <div className='w-full p-2 ml-2 text-sm font-medium cursor-default'>
+                    <div className='w-full p-2 ml-10 text-sm font-medium cursor-default'>
                     Services
                     </div>
                     <i className='fa fa-minus text-red-500 p-3'></i> 
@@ -168,7 +206,7 @@ const Header =()=> {
                       :
                       <>
                         <div className='flex justify-between'>
-                          <div className='w-full p-2 ml-2 text-sm font-medium cursor-default' >
+                          <div className='w-full p-2 ml-10 text-sm font-medium cursor-default' >
                           Services
                           </div>
                           <i className='fa fa-plus p-3'></i> 
@@ -181,49 +219,68 @@ const Header =()=> {
                 </div>
                   <div {...getCollapseProps()} >
                     <div class=" rounded">
-                      <li  className="list-none bg-gray-200 p-3 mb-2"><a className="whitespace-no-wrap block rounded-t hover:text-red-500 py-2 px-4 text-xs" href="/service/iphone-app-development/" onClick={()=>{setIsOpen(!isOpen)}}>IPHONE APP DEVELOPMENT</a></li>
+                      <li  className="list-none bg-gray-200 p-3 mb-2"><NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        }
+                        className="whitespace-no-wrap block rounded-t hover:text-red-500 py-2 px-4 text-xs" to="/service/iphone-app-development/" onClick={()=>{setIsOpen(!isOpen)}}>IPHONE APP DEVELOPMENT</NavLink></li>
                       <hr/>
-                      <li className="list-none bg-gray-200 p-3 mb-2"><a className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs " href="/service/android-app-development/" onClick={()=>{setIsOpen(!isOpen)}}>ANDROID APP DEVELOPMENT</a></li>
+                      <li className="list-none bg-gray-200 p-3 mb-2"><NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs " to="/service/android-app-development/" onClick={()=>{setIsOpen(!isOpen)}}>ANDROID APP DEVELOPMENT</NavLink></li>
                       <hr />
-                      <li className="list-none bg-gray-200 p-3 mb-2"><a className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs" href="/service/custom-web-development/" onClick={()=>{setIsOpen(!isOpen)}}>CUSTOM WEB DEVELOPMENT</a></li>
+                      <li className="list-none bg-gray-200 p-3 mb-2"><NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs" to="/service/custom-web-development/" onClick={()=>{setIsOpen(!isOpen)}}>CUSTOM WEB DEVELOPMENT</NavLink></li>
                       <hr />
-                      <li className="list-none  bg-gray-200 p-3 mb-2"><a className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs" href="/service/desktop-app-development/" onClick={()=>{setIsOpen(!isOpen)}}>DESKTOP APP DEVELOPMENT</a></li>
+                      <li className="list-none  bg-gray-200 p-3 mb-2"><NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs" to="/service/desktop-app-development/" onClick={()=>{setIsOpen(!isOpen)}}>DESKTOP APP DEVELOPMENT</NavLink></li>
                       <hr />
                     </div>
                   </div>
  
   
-                  <a href='/about'
-                  className={active && active=='/about/'?"hover:bg-black-700 text-red-500  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500 ":"hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500"} 
+                  <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } to='/about'
+                  className="hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500" 
                     // className="text-black hover:text-red-500  block px-3 py-2 rounded-md text-sm font-medium"
                     onClick={()=>{setIsOpen(!isOpen)}}
                   >
                     AboutUs
-                  </a>
+                  </NavLink>
                   <hr/>
-                  <a
-                    href="/portfolio"
-                    className={active&&active=='/portfolio/'?"hover:bg-black-700 text-red-500  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500 ":"hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500"} 
+                  <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        }
+                    to="/portfolio"
+                    className="hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500" 
                     
                     // className="text-black hover:text-red-500  block px-3 py-2 rounded-md text-sm font-medium"
                     onClick={()=>{setIsOpen(!isOpen)}}
                   >
                     Portfolio
-                  </a>
+                  </NavLink>
                   <hr/>
-                  <a
-                    href="/contact"
-                    className={active&&active=='/contact/'?"hover:bg-black-700 text-red-500  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500 ":"hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500"} 
+                  <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } 
+                    to="/contact"
+                    className="hover:bg-black-700 text-black  block px-3 py-2 rounded-md text-sm font-medium hover:text-red-500" 
          
                     // className="text-black hover:text-red-500  block px-3 py-2 rounded-md text-sm font-medium"
                     onClick={()=>{setIsOpen(!isOpen)}}
                   >
                     Contact
-                  </a>
+                  </NavLink>
                   <hr/>
                   <button 
                    className={active&&active=='/request-a-quote/'?"text-red-500 hover:bg-gray-700 bg-black  w-full rounded-md text-sm font-medium ":"text-white hover:bg-gray-700  bg-black w-full rounded-md text-sm font-medium"} 
-                  ><a className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs" href="/request-a-quote" >Request a Quote</a>
+                  >
+                    <NavLink style={({ isActive }) =>
+                        isActive ? activeStyle : undefined
+                        } 
+                      className="whitespace-no-wrap block hover:text-red-500 py-2 px-4 text-xs" to="/request-a-quote" >Request a Quote</NavLink>
                   </button>
                   <hr/>
                 </div>

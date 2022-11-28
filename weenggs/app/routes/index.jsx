@@ -1,15 +1,24 @@
-
+import React,{useEffect} from 'react'
 import { frame,brands,datasubject,details,client } from "../content/frame";
 import onetwo from '../assets/onetwo.png'
 import tech from '../assets/tech.png';
-import Image from "../ImageViewer/index";
+import ProgressBar from "@ramonak/react-progress-bar";
+import ImageViewer from "react-simple-image-viewer";
+
+
+
 import ProgressLine from '../ProgressLine/Progress'
 
 const Index=()=> {
- 
-  return (
+	useEffect(() => {
+        document.title = "Weenggs Technology"
+     }, []);
+
+	
+return (
   <>
-    <div className="h-screen w-full bg-no-repeat bg-center m-auto bg-cover bg-section1">
+
+    <div className="h-screen w-full bg-no-repeat bg-center m-auto bg-cover bg-[url('https://www.weenggs.com/wp-content/uploads/2019/08/bg.jpg')]">
         <div className='bg-[#7f818b] opacity-80  flex'>
         <section className='h-[100vh] justify-center items-center lg:h-[100vh] p-4 lg:w-[1140px] flex m-auto'>
           <div className=' text-center flex-col justify-center'>
@@ -107,7 +116,8 @@ const Index=()=> {
 		</div >
 		
 		
-		<Image />
+		{/* <Image /> */}
+   
 
 		<div className='bg-[#fff]'>
       <section className='lg:pb-20 lg:max-w-[1140px] block m-auto'>
@@ -116,8 +126,9 @@ const Index=()=> {
          <h1 className='text-[#999] text-sm  '>TECHNOLOGIES WE ARE VERY SAVVY</h1>
          <h1 className='text-[#bf1e2e] lg:font-weight:600; lg:text-4xl md:text-2xl mb-5 '>WITH OUR SKILLS</h1>
         <div className='py-5'>
-            {/* {datasubject && datasubject.map((data,ind)=>{return(
-                <ProgressLine client:visible
+            {datasubject && datasubject.map((data,ind)=>{return(
+                <ProgressLine 
+                
                 label={data.subject}
                 visualParts={[
                   {
@@ -126,7 +137,8 @@ const Index=()=> {
                   }
                 ]} 
               />
-              )})}  */}
+          
+              )})} 
          </div>
         </div>
 
@@ -195,8 +207,9 @@ const Index=()=> {
 					<p className='text-center text-sm text-[#999] '>Some of the many clients we've helped achieve great results</p>
 					<div className="container my-5 m-auto">
 					<div className="flex flex-col w-full h-fit">		
-						<div className="swiffy-slider slider-item-show4 slider-nav-outside slider-indicators-dark slider-indicators-round slider-nav-round slider-nav-dark  slider-nav-sm slider-nav-visible slider-item-snapstart slider-item-center  py-3 py-lg-4 md:slider-item-show3" >
-								<div className="slider-container max-w[1140px] ">
+            
+						<div className="swiffy-slider slider-item-show4 slider-nav-outside slider-indicators-dark slider-indicators-round slider-nav-round slider-nav-dark  slider-nav-sm slider-nav-visible slider-item-snapstart slider-item-center  py-3 py-lg-4 md:slider-item-show3 slider-nav-autoplay " data-slider-nav-autoplay-interval="2000" >
+							 <div className="slider-container max-w[1140px] ">
 								{client && client.map((citem,ind)=>{return(
 								<div key={ind} className="   h-auto   m-auto ">
 										
@@ -206,7 +219,7 @@ const Index=()=> {
 									
 								)})}
 								
-							</div>
+							 </div>
 							<button type="button" className="slider-nav" aria-label="Go left"></button>
 							<button type="button" className="slider-nav slider-nav-next" aria-label="Go left"></button>
 
@@ -216,30 +229,14 @@ const Index=()=> {
 								<button aria-label="Go to slide" className="active"></button>
 							</div>
 						</div>
+
+
 					</div>
 					</div>
 					</div>
 				
 				</section>
-    	</div> 
-
-
-<div class="swiffy-slider slider-item-helper">
-    <ul class="slider-container">
-        <li>Slide 1</li>
-        <li>Slide 2</li>
-        <li>Slide 3</li>
-    </ul>
-
-    <button type="button" class="slider-nav"></button>
-    <button type="button" class="slider-nav slider-nav-next"></button>
-
-    <div class="slider-indicators">
-        <button class="active"></button>
-        <button></button>
-        <button></button>
-    </div>
-</div>
+    	</div>  
 
     </>
   );
